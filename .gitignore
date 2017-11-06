@@ -3,12 +3,10 @@
 *.war
 *.ear
 
+.idea/*
+
 *.iml
 
-*.jpg
-*.png
-*.gif
-/.idea/
-/bin/
-target/
-logs/
+!test/
+forward/src/test/
+loadNote/src/test/
