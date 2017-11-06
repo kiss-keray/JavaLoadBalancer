@@ -1,0 +1,14 @@
+
+*.jar
+*.war
+*.ear
+
+*.iml
+
+*.jpg
+*.png
+*.gif
+/.idea/
+/bin/
+target/
+logs/
