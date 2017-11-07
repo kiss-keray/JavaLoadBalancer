@@ -50,10 +50,23 @@ public class Note {
     }
 
     public byte[] getByteMac() {
-        return null;
+        byte[] bytes = new byte[6];
+        String[] macs = getMac().split(":");
+        for (int i = 0;i < bytes.length;i ++) {
+            bytes[i] = (byte) ((int)(Integer.decode("0x" + macs[i])));
+        }
+        return bytes;
     }
 
     public void setMac(String mac) {
         this.mac = mac;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "ip='" + ip + '\'' +
+                ", mac='" + mac + '\'' +
+                '}';
     }
 }

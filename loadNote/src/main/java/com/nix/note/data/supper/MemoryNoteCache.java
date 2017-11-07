@@ -15,18 +15,26 @@ public class MemoryNoteCache implements NoteCache {
      * */
     private static MemoryNoteCache cache = null;
 
-    private MemoryNoteCache(){}
+    private MemoryNoteCache(){
+        Note note = new Note();
+        note.setIp("59.110.234.213");
+        note.setMac("00:16:3e:30:30:5a");
+        try {
+            add(note);
+            System.out.println(note.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 获取一个内存节点缓存
      * */
-    public static NoteCache getNoteCache() {
-        synchronized (cache) {
-            if (cache == null) {
-                return new MemoryNoteCache();
-            }else {
-                return cache;
-            }
+    public static synchronized NoteCache getNoteCache() {
+        if (cache == null) {
+            return new MemoryNoteCache();
+        }else {
+            return cache;
         }
     }
 
@@ -47,6 +55,9 @@ public class MemoryNoteCache implements NoteCache {
     public Note getExcellentNote() throws Exception {
         //简便的负载算法 队列循环
         Note n = NOTE_CAHCE.poll();
+        if (n == null){
+            return null;
+        }
         n.addConnect();
         NOTE_CAHCE.put(n);
         return n;

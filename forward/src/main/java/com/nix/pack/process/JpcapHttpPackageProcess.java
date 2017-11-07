@@ -11,6 +11,7 @@ import jpcap.NetworkInterface;
 import jpcap.packet.EthernetPacket;
 import jpcap.packet.IPPacket;
 import jpcap.packet.Packet;
+import jpcap.packet.TCPPacket;
 
 import java.io.IOException;
 import java.net.Inet4Address;
@@ -112,6 +113,9 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
     public void distributionPackToNote(IPPacket ... packets) {
         try {
             Note note = noteCache.getExcellentNote();
+            if (note == null) {
+               return;
+            }
             for (IPPacket packet:packets) {
                 //更改ip数据包的目的ip地址
                 packet.dst_ip = Inet4Address.getByName(note.getIp());
@@ -119,6 +123,8 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
                 ((EthernetPacket) packet.datalink).dst_mac = note.getByteMac();
 
                 sender.sendPacket(packet);
+
+                System.out.println("发送数据包：" + (TCPPacket)packet + "给：" + note);
             }
         } catch (Exception e) {
             e.printStackTrace();
