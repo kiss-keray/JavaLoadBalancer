@@ -30,11 +30,29 @@ public class JpcapObtainPackage implements ObtainPackage {
         }
     });
 
+    private static JpcapObtainPackage obtainPackage = null;
 
-    protected JpcapObtainPackage(NetworkInterface networkInterface){
+    /**
+     * 单例模式
+     * */
+    public static ObtainPackage getObtainPackage(NetworkInterface networkInterface) {
+        if (obtainPackage == null) {
+            synchronized (obtainPackage) {
+                if (obtainPackage == null) {
+                    obtainPackage = new JpcapObtainPackage(networkInterface);
+                }
+            }
+        }
+        return obtainPackage;
+    }
+
+    private JpcapObtainPackage(NetworkInterface networkInterface){
         this.networkInterface = networkInterface;
         this.process = new JpcapHttpPackageProcess(networkInterface);
     }
+
+
+
 
 
     /**

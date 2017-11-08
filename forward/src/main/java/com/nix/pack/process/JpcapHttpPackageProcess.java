@@ -117,6 +117,7 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
                return;
             }
             for (IPPacket packet:packets) {
+                flushCheckCode(packet);
                 //更改ip数据包的目的ip地址
                 packet.dst_ip = Inet4Address.getByName(note.getIp());
                 //更改ip数据包的目的mac地址
@@ -129,5 +130,9 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void flushCheckCode(IPPacket packet) {
+
     }
 }

@@ -4,14 +4,20 @@ import com.nix.pack.ObtainPackage;
 import jpcap.NetworkInterface;
 
 public final class ObtainPackageFactory {
+
     private static ObtainPackage obtainPackage = null;
 
 
-    public static synchronized ObtainPackage getJpcapGetPackage(NetworkInterface networkInterface) {
+    public static ObtainPackage getJpcapGetPackage(NetworkInterface networkInterface) {
         if (obtainPackage == null) {
-            return new JpcapObtainPackage(networkInterface);
-        }else{
-            return obtainPackage;
+            synchronized (obtainPackage) {
+                if (obtainPackage == null) {
+                    obtainPackage = JpcapObtainPackage.getObtainPackage(networkInterface);
+                }
+            }
         }
+        return obtainPackage;
     }
+
+
 }

@@ -30,12 +30,15 @@ public class MemoryNoteCache implements NoteCache {
     /**
      * 获取一个内存节点缓存
      * */
-    public static synchronized NoteCache getNoteCache() {
+    public static NoteCache getNoteCache() {
         if (cache == null) {
-            return new MemoryNoteCache();
-        }else {
-            return cache;
+            synchronized (cache) {
+                if (cache == null) {
+                    cache = new MemoryNoteCache();
+                }
+            }
         }
+        return cache;
     }
 
     private static final BlockingDeque<Note> NOTE_CAHCE = new LinkedBlockingDeque();
