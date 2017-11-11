@@ -14,6 +14,7 @@ public class MemoryNoteCache implements NoteCache {
      * 缓存一直保持单例
      * */
     private static MemoryNoteCache cache = null;
+    private static final Object clock = new Object();
 
     private MemoryNoteCache(){
         Note note = new Note();
@@ -32,7 +33,7 @@ public class MemoryNoteCache implements NoteCache {
      * */
     public static NoteCache getNoteCache() {
         if (cache == null) {
-            synchronized (cache) {
+            synchronized (clock) {
                 if (cache == null) {
                     cache = new MemoryNoteCache();
                 }

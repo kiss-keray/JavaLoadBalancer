@@ -26,7 +26,7 @@ import java.util.concurrent.Executors;
  * @author 11723
  * 加工jpcap抓取到的http数据包
  */
-public class JpcapHttpPackageProcess implements Process<IPPacket>{
+public class JpcapHttpPackageProcess implements Process<TCPPacket>{
 
     /**
      * 数据包发送网卡句柄
@@ -52,7 +52,7 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
     /**
      * 对分片ip包的缓存
      * */
-    private ConcurrentHashMap<String,List<IPPacket>> packetCache = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String,List<TCPPacket>> packetCache = new ConcurrentHashMap<>();
     /**
      * 保存分片数据包缓存时间 便于清除超时还没传送完整的缓存
      * */
@@ -61,7 +61,7 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
     /**
      * 抓包线程{@link JpcapObtainPackage}获取到一个http数据包交给此方法处理
      * */
-    public void addHttpPackage(IPPacket packet) {
+    public void addHttpPackage(TCPPacket packet) {
         try {
             // 当ip数据包为不分片的单包时直接转发到节点
             if (!packet.more_frag && packet.offset == 0) {
@@ -75,7 +75,7 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
                      * 分组数据包第一次被获取 添加到packet缓存中
                      * Collections.synchronizedList(new ArrayList<IPPacket>()) 保证list操作线程安全
                      */
-                    List<IPPacket> packets = Collections.synchronizedList(new ArrayList<IPPacket>());
+                    List<TCPPacket> packets = Collections.synchronizedList(new ArrayList<TCPPacket>());
                     packets.add(packet);
                     //添加一个分组的缓存
                     packetCache.put(String.valueOf(packet.ident),packets);
@@ -89,13 +89,13 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
     }
 
 
-    private void process(List<IPPacket> packetList){
-        IPPacket[] packets = new IPPacket[packetList.size()];
+    private void process(List<TCPPacket> packetList){
+        TCPPacket[] packets = new TCPPacket[packetList.size()];
         packetList.toArray(packets);
         //对同一标志的ip数据包检查接收是否完整
         //需要重新优化不需要排序完成
         for(int i = 1;i < packets.length; i ++){
-            IPPacket k = packets[i];
+            TCPPacket k = packets[i];
             int j = i;
             for (;j > 0 && packets[j - 1].offset > k.offset;j--) {
                 packets[j] = packets[j - 1];
@@ -110,29 +110,60 @@ public class JpcapHttpPackageProcess implements Process<IPPacket>{
     }
 
     @Override
-    public void distributionPackToNote(IPPacket ... packets) {
+    public void distributionPackToNote(TCPPacket ... packets) {
         try {
             Note note = noteCache.getExcellentNote();
             if (note == null) {
                return;
             }
-            for (IPPacket packet:packets) {
-                flushCheckCode(packet);
+            for (TCPPacket packet:packets) {
                 //更改ip数据包的目的ip地址
                 packet.dst_ip = Inet4Address.getByName(note.getIp());
+                packet.header[30] = packet.dst_ip.getAddress()[0];
+                packet.header[31] = packet.dst_ip.getAddress()[1];
+                packet.header[32] = packet.dst_ip.getAddress()[2];
+                packet.header[33] = packet.dst_ip.getAddress()[3];
                 //更改ip数据包的目的mac地址
                 ((EthernetPacket) packet.datalink).dst_mac = note.getByteMac();
-
+                packet.header[0] = ((EthernetPacket) packet.datalink).dst_mac[0];
+                packet.header[1] = ((EthernetPacket) packet.datalink).dst_mac[1];
+                packet.header[2] = ((EthernetPacket) packet.datalink).dst_mac[2];
+                packet.header[3] = ((EthernetPacket) packet.datalink).dst_mac[3];
+                packet.header[4] = ((EthernetPacket) packet.datalink).dst_mac[4];
+                packet.header[5] = ((EthernetPacket) packet.datalink).dst_mac[5];
+                flushCheckCode(packet);
                 sender.sendPacket(packet);
 
-                System.out.println("发送数据包：" + (TCPPacket)packet + "给：" + note);
+                System.out.println("发送数据包：" + packet + "给：" + note);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void flushCheckCode(IPPacket packet) {
-
+    /**
+     * 重新计算ip数据包的校验码
+     * */
+    private void flushCheckCode(TCPPacket packet) {
+        //14-33位ip数据包固定20位 24 25两位位校验码
+        byte[] header = packet.header;
+        short checkSum;
+        int sum = 0;
+        int count = 0;
+        for (int i = 14;i < 34;i += 2) {
+            if (i == 24) {
+                sum += 0;
+            }else {
+                sum += (((((int) header[i]) << 8) & 0x0000ff00) + (((int)header[i + 1]) & 0x000000ff));
+                if (sum > 65535) {
+                    count ++;
+                }
+                sum &= 0x0000ffff;
+            }
+        }
+        checkSum = (short) (~sum - count);
+        header[24] = (byte) (checkSum >> 8);
+        header[25] = (byte)checkSum;
+        packet.header = header;
     }
 }

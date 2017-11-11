@@ -31,13 +31,14 @@ public class JpcapObtainPackage implements ObtainPackage {
     });
 
     private static JpcapObtainPackage obtainPackage = null;
+    private static final Object clock = new Object();
 
     /**
      * 单例模式
      * */
     public static ObtainPackage getObtainPackage(NetworkInterface networkInterface) {
         if (obtainPackage == null) {
-            synchronized (obtainPackage) {
+            synchronized (clock) {
                 if (obtainPackage == null) {
                     obtainPackage = new JpcapObtainPackage(networkInterface);
                 }
@@ -97,7 +98,7 @@ public class JpcapObtainPackage implements ObtainPackage {
                                     threadPool.execute(new Runnable() {
                                         @Override
                                         public void run() {
-                                            process.addHttpPackage((IPPacket) packet);
+                                            process.addHttpPackage((TCPPacket)packet);
                                         }
                                     });
                                 }
