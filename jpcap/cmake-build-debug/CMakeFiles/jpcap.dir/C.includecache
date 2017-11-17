@@ -70,6 +70,16 @@ G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapCaptor.h
 jni.h
 G:/JavaLoadBalancer/jpcap/jni.h
 
+G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapSender.c
+com_nix_jpcap_JpcapSender.h
+G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapSender.h
+pcap.h
+G:/JavaLoadBalancer/jpcap/pcap.h
+
+G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapSender.h
+jni.h
+G:/JavaLoadBalancer/jpcap/jni.h
+
 G:/JavaLoadBalancer/jpcap/jni.h
 stdio.h
 -

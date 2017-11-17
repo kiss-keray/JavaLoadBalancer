@@ -149,32 +149,32 @@ com_nix_jpcap_JpcapCaptor.c.s:
 	$(MAKE) -f CMakeFiles\jpcap.dir\build.make CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.s
 .PHONY : com_nix_jpcap_JpcapCaptor.c.s
 
-library.obj: library.cpp.obj
+com_nix_jpcap_JpcapSender.obj: com_nix_jpcap_JpcapSender.c.obj
 
-.PHONY : library.obj
+.PHONY : com_nix_jpcap_JpcapSender.obj
 
 # target to build an object file
-library.cpp.obj:
-	$(MAKE) -f CMakeFiles\jpcap.dir\build.make CMakeFiles/jpcap.dir/library.cpp.obj
-.PHONY : library.cpp.obj
+com_nix_jpcap_JpcapSender.c.obj:
+	$(MAKE) -f CMakeFiles\jpcap.dir\build.make CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapSender.c.obj
+.PHONY : com_nix_jpcap_JpcapSender.c.obj
 
-library.i: library.cpp.i
+com_nix_jpcap_JpcapSender.i: com_nix_jpcap_JpcapSender.c.i
 
-.PHONY : library.i
+.PHONY : com_nix_jpcap_JpcapSender.i
 
 # target to preprocess a source file
-library.cpp.i:
-	$(MAKE) -f CMakeFiles\jpcap.dir\build.make CMakeFiles/jpcap.dir/library.cpp.i
-.PHONY : library.cpp.i
+com_nix_jpcap_JpcapSender.c.i:
+	$(MAKE) -f CMakeFiles\jpcap.dir\build.make CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapSender.c.i
+.PHONY : com_nix_jpcap_JpcapSender.c.i
 
-library.s: library.cpp.s
+com_nix_jpcap_JpcapSender.s: com_nix_jpcap_JpcapSender.c.s
 
-.PHONY : library.s
+.PHONY : com_nix_jpcap_JpcapSender.s
 
 # target to generate assembly for a file
-library.cpp.s:
-	$(MAKE) -f CMakeFiles\jpcap.dir\build.make CMakeFiles/jpcap.dir/library.cpp.s
-.PHONY : library.cpp.s
+com_nix_jpcap_JpcapSender.c.s:
+	$(MAKE) -f CMakeFiles\jpcap.dir\build.make CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapSender.c.s
+.PHONY : com_nix_jpcap_JpcapSender.c.s
 
 # Help Target
 help:
@@ -188,9 +188,9 @@ help:
 	@echo ... com_nix_jpcap_JpcapCaptor.obj
 	@echo ... com_nix_jpcap_JpcapCaptor.i
 	@echo ... com_nix_jpcap_JpcapCaptor.s
-	@echo ... library.obj
-	@echo ... library.i
-	@echo ... library.s
+	@echo ... com_nix_jpcap_JpcapSender.obj
+	@echo ... com_nix_jpcap_JpcapSender.i
+	@echo ... com_nix_jpcap_JpcapSender.s
 .PHONY : help
 
 

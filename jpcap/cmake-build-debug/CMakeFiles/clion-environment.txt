@@ -1,4 +1,4 @@
-ToolSet: w64 4.0@C:\TDM-GCC-64
+ToolSet: w64 3.4@C:\mingw64
 Options: 
 CMake: 3.9.4@D:\CLion 173.3302.18\bin\cmake\bin\cmake.exe
 
