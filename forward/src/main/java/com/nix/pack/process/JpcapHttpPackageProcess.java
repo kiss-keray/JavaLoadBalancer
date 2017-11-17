@@ -119,22 +119,22 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
             for (TCPPacket packet:packets) {
                 //更改ip数据包的目的ip地址
                 packet.dst_ip = Inet4Address.getByName(note.getIp());
-                packet.header[30] = packet.dst_ip.getAddress()[0];
-                packet.header[31] = packet.dst_ip.getAddress()[1];
-                packet.header[32] = packet.dst_ip.getAddress()[2];
-                packet.header[33] = packet.dst_ip.getAddress()[3];
+//                packet.header[30] = packet.dst_ip.getAddress()[0];
+//                packet.header[31] = packet.dst_ip.getAddress()[1];
+//                packet.header[32] = packet.dst_ip.getAddress()[2];
+//                packet.header[33] = packet.dst_ip.getAddress()[3];
                 //更改ip数据包的目的mac地址
                 ((EthernetPacket) packet.datalink).dst_mac = note.getByteMac();
-                packet.header[0] = ((EthernetPacket) packet.datalink).dst_mac[0];
-                packet.header[1] = ((EthernetPacket) packet.datalink).dst_mac[1];
-                packet.header[2] = ((EthernetPacket) packet.datalink).dst_mac[2];
-                packet.header[3] = ((EthernetPacket) packet.datalink).dst_mac[3];
-                packet.header[4] = ((EthernetPacket) packet.datalink).dst_mac[4];
-                packet.header[5] = ((EthernetPacket) packet.datalink).dst_mac[5];
-                flushCheckCode(packet);
+//                packet.header[0] = ((EthernetPacket) packet.datalink).dst_mac[0];
+//                packet.header[1] = ((EthernetPacket) packet.datalink).dst_mac[1];
+//                packet.header[2] = ((EthernetPacket) packet.datalink).dst_mac[2];
+//                packet.header[3] = ((EthernetPacket) packet.datalink).dst_mac[3];
+//                packet.header[4] = ((EthernetPacket) packet.datalink).dst_mac[4];
+//                packet.header[5] = ((EthernetPacket) packet.datalink).dst_mac[5];
+//                flushCheckCode(packet);
                 sender.sendPacket(packet);
 
-                System.out.println("发送数据包：" + packet + "给：" + note);
+                System.out.println("发送数据包：" + packet + "  给：" + note);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -146,7 +146,6 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
      * */
     private void flushCheckCode(TCPPacket packet) {
         //14-33位ip数据包固定20位 24 25两位位校验码
-        byte[] header = packet.header;
         short checkSum;
         int sum = 0;
         int count = 0;
@@ -154,7 +153,7 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
             if (i == 24) {
                 sum += 0;
             }else {
-                sum += (((((int) header[i]) << 8) & 0x0000ff00) + (((int)header[i + 1]) & 0x000000ff));
+                sum += (((((int) packet.header[i]) << 8) & 0x0000ff00) + (((int)packet.header[i + 1]) & 0x000000ff));
                 if (sum > 65535) {
                     count ++;
                 }
@@ -162,8 +161,11 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
             }
         }
         checkSum = (short) (~sum - count);
-        header[24] = (byte) (checkSum >> 8);
-        header[25] = (byte)checkSum;
-        packet.header = header;
+        if (packet.header[24] != (byte) (checkSum >> 8) && packet.header[25] != (byte)checkSum) {
+            System.out.println(packet.header[24] + "---" + (byte) (checkSum >> 8));
+            System.out.println(packet.header[25] + "---" + (byte)checkSum);
+        }
+        packet.header[24] = (byte) (checkSum >> 8);
+        packet.header[25] = (byte)checkSum;
     }
 }

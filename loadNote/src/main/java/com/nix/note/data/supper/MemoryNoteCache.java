@@ -19,7 +19,7 @@ public class MemoryNoteCache implements NoteCache {
     private MemoryNoteCache(){
         Note note = new Note();
         note.setIp("59.110.234.213");
-        note.setMac("00:16:3e:30:30:5a");
+        note.setMac("b8:f8:83:f8:ae:94");
         try {
             add(note);
             System.out.println(note.toString());
