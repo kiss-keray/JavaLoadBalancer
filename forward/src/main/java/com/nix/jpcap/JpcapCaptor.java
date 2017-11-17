@@ -4,6 +4,9 @@ package com.nix.jpcap;
  * @author 11723
  */
 public class JpcapCaptor {
+    static {
+        System.loadLibrary("libjpcap");
+    }
     public static native NetworkInterface[] getDeviceList();
     public native boolean setPacketReadTimeout(int var1);
     public native int loopPacket(int var1, PacketReceiver var2);

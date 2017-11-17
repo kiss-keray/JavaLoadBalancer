@@ -42,10 +42,10 @@ RM = "D:\CLion 173.3302.18\bin\cmake\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = G:\Clion\jpcap
+CMAKE_SOURCE_DIR = G:\JavaLoadBalancer\jpcap
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = G:\Clion\jpcap\cmake-build-debug
+CMAKE_BINARY_DIR = G:\JavaLoadBalancer\jpcap\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/jpcap.dir/depend.make
@@ -56,18 +56,44 @@ include CMakeFiles/jpcap.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/jpcap.dir/flags.make
 
+CMakeFiles/jpcap.dir/library.cpp.obj: CMakeFiles/jpcap.dir/flags.make
+CMakeFiles/jpcap.dir/library.cpp.obj: CMakeFiles/jpcap.dir/includes_CXX.rsp
+CMakeFiles/jpcap.dir/library.cpp.obj: ../library.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\JavaLoadBalancer\jpcap\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/jpcap.dir/library.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\jpcap.dir\library.cpp.obj -c G:\JavaLoadBalancer\jpcap\library.cpp
+
+CMakeFiles/jpcap.dir/library.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jpcap.dir/library.cpp.i"
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E G:\JavaLoadBalancer\jpcap\library.cpp > CMakeFiles\jpcap.dir\library.cpp.i
+
+CMakeFiles/jpcap.dir/library.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jpcap.dir/library.cpp.s"
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S G:\JavaLoadBalancer\jpcap\library.cpp -o CMakeFiles\jpcap.dir\library.cpp.s
+
+CMakeFiles/jpcap.dir/library.cpp.obj.requires:
+
+.PHONY : CMakeFiles/jpcap.dir/library.cpp.obj.requires
+
+CMakeFiles/jpcap.dir/library.cpp.obj.provides: CMakeFiles/jpcap.dir/library.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\jpcap.dir\build.make CMakeFiles/jpcap.dir/library.cpp.obj.provides.build
+.PHONY : CMakeFiles/jpcap.dir/library.cpp.obj.provides
+
+CMakeFiles/jpcap.dir/library.cpp.obj.provides.build: CMakeFiles/jpcap.dir/library.cpp.obj
+
+
 CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj: CMakeFiles/jpcap.dir/flags.make
+CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj: CMakeFiles/jpcap.dir/includes_C.rsp
 CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj: ../com_nix_jpcap_JpcapCaptor.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\Clion\jpcap\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\jpcap.dir\com_nix_jpcap_JpcapCaptor.c.obj   -c G:\Clion\jpcap\com_nix_jpcap_JpcapCaptor.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=G:\JavaLoadBalancer\jpcap\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj"
+	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\jpcap.dir\com_nix_jpcap_JpcapCaptor.c.obj   -c G:\JavaLoadBalancer\jpcap\com_nix_jpcap_JpcapCaptor.c
 
 CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.i"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\Clion\jpcap\com_nix_jpcap_JpcapCaptor.c > CMakeFiles\jpcap.dir\com_nix_jpcap_JpcapCaptor.c.i
+	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E G:\JavaLoadBalancer\jpcap\com_nix_jpcap_JpcapCaptor.c > CMakeFiles\jpcap.dir\com_nix_jpcap_JpcapCaptor.c.i
 
 CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.s"
-	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\Clion\jpcap\com_nix_jpcap_JpcapCaptor.c -o CMakeFiles\jpcap.dir\com_nix_jpcap_JpcapCaptor.c.s
+	C:\TDM-GCC-64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S G:\JavaLoadBalancer\jpcap\com_nix_jpcap_JpcapCaptor.c -o CMakeFiles\jpcap.dir\com_nix_jpcap_JpcapCaptor.c.s
 
 CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj.requires:
 
@@ -82,23 +108,27 @@ CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj.provides.build: CMakeFiles/
 
 # Object files for target jpcap
 jpcap_OBJECTS = \
+"CMakeFiles/jpcap.dir/library.cpp.obj" \
 "CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj"
 
 # External object files for target jpcap
 jpcap_EXTERNAL_OBJECTS =
 
-libjpcap.a: CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj
-libjpcap.a: CMakeFiles/jpcap.dir/build.make
-libjpcap.a: CMakeFiles/jpcap.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=G:\Clion\jpcap\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libjpcap.a"
-	$(CMAKE_COMMAND) -P CMakeFiles\jpcap.dir\cmake_clean_target.cmake
+libjpcap.dll: CMakeFiles/jpcap.dir/library.cpp.obj
+libjpcap.dll: CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj
+libjpcap.dll: CMakeFiles/jpcap.dir/build.make
+libjpcap.dll: CMakeFiles/jpcap.dir/linklibs.rsp
+libjpcap.dll: CMakeFiles/jpcap.dir/objects1.rsp
+libjpcap.dll: CMakeFiles/jpcap.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=G:\JavaLoadBalancer\jpcap\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library libjpcap.dll"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\jpcap.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/jpcap.dir/build: libjpcap.a
+CMakeFiles/jpcap.dir/build: libjpcap.dll
 
 .PHONY : CMakeFiles/jpcap.dir/build
 
+CMakeFiles/jpcap.dir/requires: CMakeFiles/jpcap.dir/library.cpp.obj.requires
 CMakeFiles/jpcap.dir/requires: CMakeFiles/jpcap.dir/com_nix_jpcap_JpcapCaptor.c.obj.requires
 
 .PHONY : CMakeFiles/jpcap.dir/requires
@@ -108,6 +138,6 @@ CMakeFiles/jpcap.dir/clean:
 .PHONY : CMakeFiles/jpcap.dir/clean
 
 CMakeFiles/jpcap.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" G:\Clion\jpcap G:\Clion\jpcap G:\Clion\jpcap\cmake-build-debug G:\Clion\jpcap\cmake-build-debug G:\Clion\jpcap\cmake-build-debug\CMakeFiles\jpcap.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" G:\JavaLoadBalancer\jpcap G:\JavaLoadBalancer\jpcap G:\JavaLoadBalancer\jpcap\cmake-build-debug G:\JavaLoadBalancer\jpcap\cmake-build-debug G:\JavaLoadBalancer\jpcap\cmake-build-debug\CMakeFiles\jpcap.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/jpcap.dir/depend
 

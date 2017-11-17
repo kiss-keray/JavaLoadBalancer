@@ -1,4 +1,4 @@
-"D:\CLion 173.3302.18\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" G:\Clion\jpcap
+"D:\CLion 173.3302.18\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" G:\JavaLoadBalancer\jpcap
 -- Configuring done
 -- Generating done
--- Build files have been written to: G:/Clion/jpcap/cmake-build-debug
+-- Build files have been written to: G:/JavaLoadBalancer/jpcap/cmake-build-debug
