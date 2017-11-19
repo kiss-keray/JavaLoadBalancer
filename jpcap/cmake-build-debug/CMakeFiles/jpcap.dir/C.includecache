@@ -6,39 +6,39 @@
 
 #IncludeRegexTransform: 
 
-D:/WpdPack/include/IP6_misc.h
+C:/WpdPack/include/IP6_misc.h
 winsock2.h
 -
 ws2tcpip.h
 -
 
-D:/WpdPack/include/Win32-Extensions.h
+C:/WpdPack/include/Win32-Extensions.h
 
-D:/WpdPack/include/bittypes.h
+C:/WpdPack/include/bittypes.h
 
-D:/WpdPack/include/pcap-stdinc.h
+C:/WpdPack/include/pcap-stdinc.h
 winsock2.h
 -
 fcntl.h
 -
 bittypes.h
-D:/WpdPack/include/bittypes.h
+C:/WpdPack/include/bittypes.h
 time.h
 -
 io.h
 -
 IP6_misc.h
-D:/WpdPack/include/IP6_misc.h
+C:/WpdPack/include/IP6_misc.h
 stdint.h
 -
 
-D:/WpdPack/include/pcap.h
+C:/WpdPack/include/pcap.h
 pcap/pcap.h
 -
 
-D:/WpdPack/include/pcap/bpf.h
+C:/WpdPack/include/pcap/bpf.h
 
-D:/WpdPack/include/pcap/pcap.h
+C:/WpdPack/include/pcap/pcap.h
 pcap-stdinc.h
 -
 sys/types.h
@@ -58,17 +58,7 @@ Win32-Extensions.h
 remote-ext.h
 -
 
-D:/WpdPack/include/remote-ext.h
-
-G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapCaptor.c
-com_nix_jpcap_JpcapCaptor.h
-G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapCaptor.h
-pcap.h
--
-
-G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapCaptor.h
-jni.h
-G:/JavaLoadBalancer/jpcap/jni.h
+C:/WpdPack/include/remote-ext.h
 
 G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapSender.c
 com_nix_jpcap_JpcapSender.h

@@ -11,20 +11,20 @@
 				<Option working_dir="G:/JavaLoadBalancer/jpcap/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="G:/JavaLoadBalancer/jpcap/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="jpcap">
@@ -34,19 +34,19 @@
 				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="D:/WpdPack/include"/>
-					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/4.9.2/include"/>
-					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/4.9.2/include-fixed"/>
-					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/4.9.2/../../../../x86_64-w64-mingw32/include"/>
-					<Add directory="C:/mingw64/lib/gcc/../../x86_64-w64-mingw32/include/c++"/>
-					<Add directory="C:/mingw64/lib/gcc/../../x86_64-w64-mingw32/include/c++/x86_64-w64-mingw32"/>
-					<Add directory="C:/mingw64/lib/gcc/../../x86_64-w64-mingw32/include/c++/backward"/>
+					<Add directory="C:/WpdPack/include"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/backward"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include-fixed"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 jpcap"/>
-					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 jpcap"/>
+					<CompileFile command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="jpcap/fast">
@@ -56,42 +56,36 @@
 				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="D:/WpdPack/include"/>
-					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/4.9.2/include"/>
-					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/4.9.2/include-fixed"/>
-					<Add directory="C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/4.9.2/../../../../x86_64-w64-mingw32/include"/>
-					<Add directory="C:/mingw64/lib/gcc/../../x86_64-w64-mingw32/include/c++"/>
-					<Add directory="C:/mingw64/lib/gcc/../../x86_64-w64-mingw32/include/c++/x86_64-w64-mingw32"/>
-					<Add directory="C:/mingw64/lib/gcc/../../x86_64-w64-mingw32/include/c++/backward"/>
+					<Add directory="C:/WpdPack/include"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/backward"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include-fixed"/>
+					<Add directory="C:/Users/wingw/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 jpcap/fast"/>
-					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 jpcap/fast"/>
+					<CompileFile command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="G:/JavaLoadBalancer/jpcap/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/wingw/mingw64/bin/mingw32-make.exe -f &quot;G:/JavaLoadBalancer/jpcap/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/WpdPack/Include">
+		<Unit filename="C:/WpdPack/Include">
 			<Option target="jpcap"/>
 		</Unit>
-		<Unit filename="G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapCaptor.c">
-			<Option target="jpcap"/>
-		</Unit>
-		<Unit filename="G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapCaptor.h">
-			<Option target="jpcap"/>
-		</Unit>
-		<Unit filename="G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapSender.c">
+		<Unit filename="G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapSender.cpp">
 			<Option target="jpcap"/>
 		</Unit>
 		<Unit filename="G:/JavaLoadBalancer/jpcap/com_nix_jpcap_JpcapSender.h">

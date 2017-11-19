@@ -617,7 +617,7 @@ struct JNINativeInterface_ {
     jsize (JNICALL *GetStringUTFLength)
       (JNIEnv *env, jstring str);
     const char * (JNICALL *GetStringUTFChars)
-            (jstring env, jboolean str);
+            (JNIEnv_ *env, jstring str, jboolean *string);
     void (JNICALL *ReleaseStringUTFChars)
       (JNIEnv *env, jstring str, const char* chars);
 
@@ -1614,7 +1614,7 @@ struct JNIEnv_ {
         return functions->GetStringUTFLength(this,str);
     }
     const char* GetStringUTFChars(jstring str, jboolean *isCopy) {
-        return functions->GetStringUTFChars(this,str,isCopy);
+        return functions->GetStringUTFChars(this, str, isCopy);
     }
     void ReleaseStringUTFChars(jstring str, const char* chars) {
         functions->ReleaseStringUTFChars(this,str,chars);

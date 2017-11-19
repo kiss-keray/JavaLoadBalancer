@@ -21,7 +21,7 @@ JNIEXPORT jstring JNICALL Java_com_nix_jpcap_JpcapSender_nativeOpenDevice
  * Signature: (Ljpcap/packet/TCPPacket;)V
  */
 JNIEXPORT void JNICALL Java_com_nix_jpcap_JpcapSender_nativeSendPacket
-  (JNIEnv *, jobject, jobject);
+  (JNIEnv *, jobject, jbyteArray);
 
 #ifdef __cplusplus
 }

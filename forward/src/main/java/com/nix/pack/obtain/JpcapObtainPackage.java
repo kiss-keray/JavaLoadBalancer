@@ -1,6 +1,7 @@
 package com.nix.pack.obtain;
 
 import com.nix.config.Config;
+import com.nix.jpcap.JpcapSender;
 import com.nix.pack.ObtainPackage;
 import com.nix.pack.process.JpcapHttpPackageProcess;
 import jpcap.JpcapCaptor;
@@ -73,6 +74,9 @@ public class JpcapObtainPackage implements ObtainPackage {
     private boolean status = false;
 
     private JpcapCaptor captor = null;
+
+    int i = 0;
+
     /**
      * 开始抓包
      * */
@@ -99,6 +103,12 @@ public class JpcapObtainPackage implements ObtainPackage {
                                         @Override
                                         public void run() {
                                             process.addHttpPackage((TCPPacket)packet);
+
+                                            i++;
+                                            if (i > 5) {
+                                                captor.close();
+                                            }
+
                                         }
                                     });
                                 }
@@ -127,7 +137,27 @@ public class JpcapObtainPackage implements ObtainPackage {
 
     public static void main(String[] args) {
         NetworkInterface[] networkInterfaces = JpcapCaptor.getDeviceList();
-        ObtainPackage obtainPackage = ObtainPackageFactory.getJpcapGetPackage(networkInterfaces[2]);
+        ObtainPackage obtainPackage = ObtainPackageFactory.getJpcapGetPackage(networkInterfaces[3]);
         obtainPackage.start();
     }
+
+//    static JpcapSender sender;
+//    public static void main(String[] args) throws Exception {
+//        NetworkInterface[] networkInterfaces = jpcap.JpcapCaptor.getDeviceList();
+//
+//        new Thread(() ->{
+//            try {
+//                sender = JpcapSender.openDevice(networkInterfaces[2]);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
+//        Thread.sleep(1000);
+//        TCPPacket packet = new TCPPacket(155,122,155,122,true,true,true,true,
+//                true,true,true,true,1,1);
+//        packet.header = new byte[]{-56,-45,-1,-45,-91,-84,-92,-54,-96,34,-97,-46,8,0,69,0,0,60,
+//                -119,84,64,0,64,6,47,78,-64,-88,0,101,-64,-88,0,100,-97,-114,0,80,-13,
+//                -19,-54,40,0,0,0,0,-96,2,-1,-1,36,-70,0,0,2,4,5,80,4,2,8,10,0,32,67,124,0,0,0,0,1,3,3,6};
+//        sender.sendPacket(packet);
+//    }
 }

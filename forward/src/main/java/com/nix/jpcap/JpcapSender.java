@@ -10,15 +10,28 @@ import java.io.IOException;
  */
 public class JpcapSender {
 
+    static {
+        System.loadLibrary("libjpcap");
+    }
+    private JpcapSender(){}
+
     private native String nativeOpenDevice(String var1);
 
-    private native void nativeSendPacket(TCPPacket var1);
+    public native void nativeSendPacket(byte[] data);
+
+    public void sendPacket(TCPPacket packet) {
+        byte[] data = new byte[packet.header.length + (packet.data != null ? packet.data.length : 0)];
+        System.arraycopy(packet.header,0,data,0,packet.header.length);
+        if (packet.data != null) {
+            System.arraycopy(packet.data, 0, data, 0, packet.data.length);
+        }
+        nativeSendPacket(data);
+    }
 
     public static JpcapSender openDevice(NetworkInterface device) throws IOException {
         JpcapSender sender = new JpcapSender();
-        System.out.println(device.name);
         String ret = sender.nativeOpenDevice(device.name);
-        if (ret == null) {
+        if (ret == null ) {
             return sender;
         } else {
             throw new IOException(ret);
