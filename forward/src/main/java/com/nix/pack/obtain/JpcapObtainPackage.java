@@ -75,8 +75,6 @@ public class JpcapObtainPackage implements ObtainPackage {
 
     private JpcapCaptor captor = null;
 
-    int i = 0;
-
     /**
      * 开始抓包
      * */
@@ -103,12 +101,6 @@ public class JpcapObtainPackage implements ObtainPackage {
                                         @Override
                                         public void run() {
                                             process.addHttpPackage((TCPPacket)packet);
-
-                                            i++;
-                                            if (i > 5) {
-                                                captor.close();
-                                            }
-
                                         }
                                     });
                                 }
@@ -137,7 +129,7 @@ public class JpcapObtainPackage implements ObtainPackage {
 
     public static void main(String[] args) {
         NetworkInterface[] networkInterfaces = JpcapCaptor.getDeviceList();
-        ObtainPackage obtainPackage = ObtainPackageFactory.getJpcapGetPackage(networkInterfaces[3]);
+        ObtainPackage obtainPackage = ObtainPackageFactory.getJpcapGetPackage(networkInterfaces[1]);
         obtainPackage.start();
     }
 

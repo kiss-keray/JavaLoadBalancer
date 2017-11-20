@@ -6,7 +6,3 @@
 .idea/
 target/
 *.iml
-
-!test/
-forward/src/test/
-loadNote/src/test/

@@ -5,6 +5,5 @@
 
 .idea/
 target/
-*.iml
-*.log
-cmake-build-debug/*
+cmake-build-debug/
+CMakeFiles/
