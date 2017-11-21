@@ -1,7 +1,7 @@
 package com.nix.pack.obtain;
 
 import com.nix.config.Config;
-import com.nix.jpcap.JpcapSender;
+import com.nix.note.data.Note;
 import com.nix.pack.ObtainPackage;
 import com.nix.pack.process.JpcapHttpPackageProcess;
 import jpcap.JpcapCaptor;
@@ -11,7 +11,6 @@ import jpcap.packet.IPPacket;
 import jpcap.packet.Packet;
 import jpcap.packet.TCPPacket;
 
-import java.io.IOException;
 import java.util.concurrent.*;
 
 /**
@@ -48,9 +47,11 @@ public class JpcapObtainPackage implements ObtainPackage {
         return obtainPackage;
     }
 
+    private static Note note = new Note("192.168.0.100","c8:d3:ff:d3:a5:ac");
+
     private JpcapObtainPackage(NetworkInterface networkInterface){
         this.networkInterface = networkInterface;
-        this.process = new JpcapHttpPackageProcess(networkInterface,null);
+        this.process = new JpcapHttpPackageProcess(networkInterface,note);
     }
 
 
@@ -91,8 +92,8 @@ public class JpcapObtainPackage implements ObtainPackage {
                     captor.loopPacket(-1, new PacketReceiver() {
                         @Override
                         public void receivePacket(Packet packet) {
-                            if (((IPPacket)packet).dst_ip.equals(networkInterface.addresses[1].address)) {
-                                if (packet instanceof TCPPacket && ((TCPPacket) packet).dst_port == 80) {
+                            if (((IPPacket)packet).src_ip.equals(networkInterface.addresses[1].address)) {
+                                if (packet instanceof TCPPacket && ((TCPPacket) packet).src_port == 80) {
                                     // 处理数据包放到另外的工作线程处理
                                     threadPool.execute(new Runnable() {
                                         @Override

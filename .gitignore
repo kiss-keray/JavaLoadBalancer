@@ -11,3 +11,4 @@ cmake-build-debug/*
 jpcap/cmake-build-debug/CMakeFiles/3.8.2/CompilerIdC/tmp/
 jpcap/cmake-build-debug/CMakeFiles/3.8.2/CompilerIdCXX/tmp/
 jpcap/cmake-build-debug/CMakeFiles/CMakeTmp/
+jpcap/CMakeFiles/

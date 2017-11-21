@@ -26,6 +26,7 @@
   <modules>
     <module>forward</module>
     <module>loadNote</module>
+      <module>note-forward</module>
   </modules>
 
 </project>

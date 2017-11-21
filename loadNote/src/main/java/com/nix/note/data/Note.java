@@ -9,6 +9,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Note {
 
+    public Note(String ip,String mac) {
+        this.ip = ip;
+        this.mac = mac;
+    }
+
     /**
      * 负载节点ip地址
      * */
