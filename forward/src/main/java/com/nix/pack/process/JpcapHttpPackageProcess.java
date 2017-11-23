@@ -6,6 +6,7 @@ import com.nix.note.data.Note;
 import com.nix.note.data.NoteCache;
 import com.nix.pack.Process;
 import com.nix.pack.obtain.JpcapObtainPackage;
+import com.nix.util.TcpUtil;
 import jpcap.NetworkInterface;
 import jpcap.packet.EthernetPacket;
 import jpcap.packet.TCPPacket;
@@ -133,13 +134,7 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
                 packet.header[3] = ((EthernetPacket) packet.datalink).dst_mac[3];
                 packet.header[4] = ((EthernetPacket) packet.datalink).dst_mac[4];
                 packet.header[5] = ((EthernetPacket) packet.datalink).dst_mac[5];
-                packet.header[6] = ((byte) ~(packet.header[6]));
-                packet.header[7] = ((byte) ~(packet.header[7]));
-                packet.header[8] = ((byte) ~(packet.header[8]));
-                packet.header[9] = ((byte) ~(packet.header[9]));
-                packet.header[10] = ((byte) ~(packet.header[10]));
-                packet.header[11] = ((byte) ~(packet.header[11]));
-                flushCheckCode(packet);
+                TcpUtil.flushCheckCode(packet);
 
                 sender.sendPacket(packet);
 
@@ -148,34 +143,5 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * 重新计算ip数据包的校验码
-     * */
-    protected void flushCheckCode(TCPPacket packet) {
-        //14-33位ip数据包固定20位 24 25两位位校验码
-        short checkSum;
-        int sum = 0;
-        int count = 0;
-        for (int i = 14;i < 34;i += 2) {
-            if (i == 24) {
-                sum += 0;
-            }else {
-                sum += (((((int) packet.header[i]) << 8) & 0x0000ff00) + (((int)packet.header[i + 1]) & 0x000000ff));
-                if (sum > 65535) {
-                    count ++;
-                }
-                sum &= 0x0000ffff;
-            }
-        }
-        checkSum = (short) (~sum - count);
-/*        if (packet.header[24] != (byte) (checkSum >> 8) && packet.header[25] != (byte)checkSum) {
-            System.out.println(packet.header[24] + "---" + (byte) (checkSum >> 8));
-            System.out.println(packet.header[25] + "---" + (byte)checkSum);
-        }*/
-        packet.header[24] = (byte) (checkSum >> 8);
-        packet.header[25] = (byte)checkSum;
-
     }
 }

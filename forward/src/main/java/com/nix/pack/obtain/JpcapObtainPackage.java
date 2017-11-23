@@ -123,4 +123,11 @@ public class JpcapObtainPackage implements ObtainPackage {
         status = false;
         captor.close();
     }
+
+
+    public static void main(String[] args) {
+        NetworkInterface[] networkInterfaces = JpcapCaptor.getDeviceList();
+        ObtainPackage obtainPackage =  ObtainPackageFactory.getJpcapGetPackage(networkInterfaces[1]);
+        obtainPackage.start();
+    }
 }

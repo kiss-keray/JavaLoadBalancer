@@ -6,6 +6,7 @@ import com.nix.note.data.NoteCache;
 import com.nix.note.data.supper.MemoryNoteCache;
 import com.nix.pack.Process;
 import com.nix.pack.obtain.JpcapObtainPackage;
+import com.nix.util.TcpUtil;
 import jpcap.NetworkInterface;
 import jpcap.packet.EthernetPacket;
 import jpcap.packet.TCPPacket;
@@ -42,19 +43,13 @@ public class ClientJpcapHttpPackageProcess extends JpcapHttpPackageProcess{
                 packet.header[29] = packet.src_ip.getAddress()[3];
                 //更改ip数据包的目的mac地址
                 ((EthernetPacket) packet.datalink).src_mac = note.getByteMac();
-                packet.header[0] = ((byte) ~packet.header[0]);
-                packet.header[1] = ((byte) ~packet.header[1]);
-                packet.header[2] = ((byte) ~packet.header[2]);
-                packet.header[3] = ((byte) ~packet.header[3]);
-                packet.header[4] = ((byte) ~packet.header[4]);
-                packet.header[5] = ((byte) ~packet.header[5]);
                 packet.header[6] = ((EthernetPacket) packet.datalink).src_mac[0];
                 packet.header[7] = ((EthernetPacket) packet.datalink).src_mac[1];
                 packet.header[8] = ((EthernetPacket) packet.datalink).src_mac[2];
                 packet.header[9] = ((EthernetPacket) packet.datalink).src_mac[3];
                 packet.header[10] = ((EthernetPacket) packet.datalink).src_mac[4];
                 packet.header[11] = ((EthernetPacket) packet.datalink).src_mac[5];
-                flushCheckCode(packet);
+                TcpUtil.flushCheckCode(packet);
 
                 sender.sendPacket(packet);
 
