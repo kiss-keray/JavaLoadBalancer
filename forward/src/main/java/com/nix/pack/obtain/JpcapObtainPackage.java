@@ -21,7 +21,7 @@ import java.util.concurrent.*;
 public class JpcapObtainPackage implements ObtainPackage {
 
     private final BlockingDeque blockingDeque = new LinkedBlockingDeque();
-    private final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(Config.CONFIG.getWorkThreadCount(),
+    protected final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(Config.CONFIG.getWorkThreadCount(),
             Config.CONFIG.getWorkThreadCount(), 0, TimeUnit.SECONDS, blockingDeque, new ThreadFactory() {
         @Override
         public Thread newThread(Runnable r) {
@@ -32,7 +32,7 @@ public class JpcapObtainPackage implements ObtainPackage {
     });
 
     private static JpcapObtainPackage obtainPackage = null;
-    private static final Object clock = new Object();
+    protected static final Object clock = new Object();
 
     /**
      * 单例模式
@@ -48,7 +48,7 @@ public class JpcapObtainPackage implements ObtainPackage {
         return obtainPackage;
     }
 
-    private JpcapObtainPackage(NetworkInterface networkInterface){
+    protected JpcapObtainPackage(NetworkInterface networkInterface){
         this.networkInterface = networkInterface;
         this.process = new JpcapHttpPackageProcess(networkInterface,null);
     }
@@ -57,7 +57,7 @@ public class JpcapObtainPackage implements ObtainPackage {
     /**
      * 工作网卡
      * */
-    private final NetworkInterface networkInterface;
+    protected final NetworkInterface networkInterface;
 
 
     /**
@@ -68,9 +68,9 @@ public class JpcapObtainPackage implements ObtainPackage {
     /**
      * 工作状态
      * */
-    private boolean status = false;
+    protected boolean status = false;
 
-    private JpcapCaptor captor = null;
+    protected JpcapCaptor captor = null;
 
     /**
      * 开始抓包
@@ -122,11 +122,5 @@ public class JpcapObtainPackage implements ObtainPackage {
     public void stop() {
         status = false;
         captor.close();
-    }
-
-    public static void main(String[] args) {
-        NetworkInterface[] networkInterfaces = JpcapCaptor.getDeviceList();
-        ObtainPackage obtainPackage = ObtainPackageFactory.getJpcapGetPackage(networkInterfaces[1]);
-        obtainPackage.start();
     }
 }

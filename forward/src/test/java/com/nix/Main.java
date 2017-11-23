@@ -17,9 +17,10 @@ public class Main {
                 -19,-54,40,0,0,0,0,-96,2,-1,-1,36,-70,0,0,2,4,5,80,4,2,8,10,0,32,67,124,0,0,0,0,1,3,3,6});
     }
 
+    @Test
     public void SenderTcpPackTest() throws IOException {
         NetworkInterface[] networkInterfaces = jpcap.JpcapCaptor.getDeviceList();
-        JpcapSender sender = JpcapSender.openDevice(networkInterfaces[2]);
+        JpcapSender sender = JpcapSender.openDevice(networkInterfaces[1]);
         TCPPacket packet = new TCPPacket(155,122,155,122,true,true,true,true,
                 true,true,true,true,1,1);
         packet.header = new byte[]{-56,-45,-1,-45,-91,-84,-92,-54,-96,34,-97,-46,8,0,69,0,0,60,

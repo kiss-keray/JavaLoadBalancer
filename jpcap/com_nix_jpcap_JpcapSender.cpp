@@ -15,13 +15,14 @@ pcap_t *fp;
 JNIEXPORT jstring JNICALL Java_com_nix_jpcap_JpcapSender_nativeOpenDevice
         (JNIEnv * env, jobject obj, jstring network) {
     char errbuf[256];
-    struct pcap_if * alldevs;//存储网卡信息
-
-    if (pcap_findalldevs(&alldevs, errbuf) == -1){
-        return env->NewStringUTF("获取网卡列表失败");
-    }
-
-    if ( (fp= pcap_open_live(alldevs->next->name, 65535, 0, 1000, errbuf
+//    struct pcap_if * alldevs;//存储网卡信息
+//
+//    if (pcap_findalldevs(&alldevs, errbuf) == -1){
+//        return env->NewStringUTF("获取网卡列表失败");
+//    }
+    jboolean b = 1;
+    const char * name = env->GetStringUTFChars(network,&b);
+    if ( (fp= pcap_open_live(name, 65535, 0, 1000, errbuf
     ) ) == NULL){
         return env->NewStringUTF("打开失败");
     }

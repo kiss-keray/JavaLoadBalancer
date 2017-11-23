@@ -24,9 +24,9 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
     /**
      * 数据包发送网卡句柄
      * */
-    private final JpcapSender sender;
+    protected final JpcapSender sender;
 
-    private final Note note;
+    protected final Note note;
 
     public JpcapHttpPackageProcess(NetworkInterface networkInterface,Note note) {
         JpcapSender j = null;
@@ -153,7 +153,7 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
     /**
      * 重新计算ip数据包的校验码
      * */
-    private void flushCheckCode(TCPPacket packet) {
+    protected void flushCheckCode(TCPPacket packet) {
         //14-33位ip数据包固定20位 24 25两位位校验码
         short checkSum;
         int sum = 0;

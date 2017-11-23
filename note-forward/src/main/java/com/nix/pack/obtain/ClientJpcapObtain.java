@@ -1,9 +1,7 @@
 package com.nix.pack.obtain;
-
-import com.nix.config.Config;
 import com.nix.note.data.Note;
 import com.nix.pack.ObtainPackage;
-import com.nix.pack.process.JpcapHttpPackageProcess;
+import com.nix.pack.process.ClientJpcapHttpPackageProcess;
 import jpcap.JpcapCaptor;
 import jpcap.NetworkInterface;
 import jpcap.PacketReceiver;
@@ -17,21 +15,10 @@ import java.util.concurrent.*;
  * @author 11723
  * 抓包工作类
  */
-public class JpcapObtainPackage implements ObtainPackage {
+public class ClientJpcapObtain extends JpcapObtainPackage {
 
-    private final BlockingDeque blockingDeque = new LinkedBlockingDeque();
-    private final ThreadPoolExecutor threadPool = new ThreadPoolExecutor(Config.CONFIG.getWorkThreadCount(),
-            Config.CONFIG.getWorkThreadCount(), 0, TimeUnit.SECONDS, blockingDeque, new ThreadFactory() {
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread thread = new Thread(r);
-            thread.setName("package");
-            return thread;
-        }
-    });
 
-    private static JpcapObtainPackage obtainPackage = null;
-    private static final Object clock = new Object();
+    private static ClientJpcapObtain obtainPackage = null;
 
     /**
      * 单例模式
@@ -40,7 +27,7 @@ public class JpcapObtainPackage implements ObtainPackage {
         if (obtainPackage == null) {
             synchronized (clock) {
                 if (obtainPackage == null) {
-                    obtainPackage = new JpcapObtainPackage(networkInterface);
+                    obtainPackage = new ClientJpcapObtain(networkInterface);
                 }
             }
         }
@@ -49,22 +36,15 @@ public class JpcapObtainPackage implements ObtainPackage {
 
     private static Note note = new Note("192.168.0.100","c8:d3:ff:d3:a5:ac");
 
-    private JpcapObtainPackage(NetworkInterface networkInterface){
-        this.networkInterface = networkInterface;
-        this.process = new JpcapHttpPackageProcess(networkInterface,note);
+    private ClientJpcapObtain(NetworkInterface networkInterface){
+        super(networkInterface);
+        this.process = new ClientJpcapHttpPackageProcess(networkInterface,note);
     }
-
-
-    /**
-     * 工作网卡
-     * */
-    private final NetworkInterface networkInterface;
-
 
     /**
      * 数据包处理器
      * */
-    private final JpcapHttpPackageProcess process;
+    private final ClientJpcapHttpPackageProcess process;
 
     /**
      * 工作状态
@@ -112,22 +92,5 @@ public class JpcapObtainPackage implements ObtainPackage {
                 }
             }
         });
-    }
-
-
-    public NetworkInterface getNetworkInterface() {
-        return networkInterface;
-    }
-
-    @Override
-    public void stop() {
-        status = false;
-        captor.close();
-    }
-
-    public static void main(String[] args) {
-        NetworkInterface[] networkInterfaces = JpcapCaptor.getDeviceList();
-        ObtainPackage obtainPackage = ObtainPackageFactory.getJpcapGetPackage(networkInterfaces[1]);
-        obtainPackage.start();
     }
 }
