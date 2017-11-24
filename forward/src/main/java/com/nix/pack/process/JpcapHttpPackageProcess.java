@@ -61,6 +61,14 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
      * */
     public void addHttpPackage(TCPPacket packet) {
         try {
+            //但tcp为请求握手数据包时
+            if (TcpUtil.isReqShakHandPacket(packet)) {
+                //发送同意握手数据包
+                TCPPacket tcpPacket = TcpUtil.getResponseShakeHandTcpPacket(packet);
+                System.out.println("确认握手  : " + tcpPacket);
+                sender.sendPacket(tcpPacket);
+            }
+
             // 当ip数据包为不分片的单包时直接转发到节点
             if (!packet.more_frag && packet.offset == 0) {
                 distributionPackToNote(note,packet);

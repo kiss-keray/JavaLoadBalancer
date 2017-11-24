@@ -25,6 +25,14 @@ public class JpcapSender {
         if (packet.data != null) {
             System.arraycopy(packet.data, 0, data, 0, packet.data.length);
         }
+
+//        synchronized (System.out) {
+//            System.out.println();
+//            for (int i = 0; i < data.length; i++) {
+//                System.out.printf("%-4d,",data[i]);
+//            }
+//            System.out.println();
+//        }
         nativeSendPacket(data);
     }
 
