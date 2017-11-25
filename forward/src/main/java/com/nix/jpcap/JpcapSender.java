@@ -20,10 +20,19 @@ public class JpcapSender {
     public native void nativeSendPacket(byte[] data);
 
     public void sendPacket(TCPPacket packet) {
+//        if (packet.data != null && packet.data.length > 0) {
+//            synchronized (System.out) {
+//                System.out.println("length==" + packet.data.length );
+//                for (int i = 0; i < packet.data.length; i++) {
+//                    System.out.print((char) packet.data[i]);
+//                }
+//                System.out.println("iden==" + packet.ident);
+//            }
+//        }
         byte[] data = new byte[packet.header.length + (packet.data != null ? packet.data.length : 0)];
         System.arraycopy(packet.header,0,data,0,packet.header.length);
         if (packet.data != null) {
-            System.arraycopy(packet.data, 0, data, 0, packet.data.length);
+            System.arraycopy(packet.data, 0, data, packet.header.length, packet.data.length);
         }
 
 //        synchronized (System.out) {

@@ -61,16 +61,14 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
      * */
     public void addHttpPackage(TCPPacket packet) {
         try {
-            //但tcp为请求握手数据包时
-            if (TcpUtil.isReqShakHandPacket(packet)) {
-                //发送同意握手数据包
-                TCPPacket tcpPacket = TcpUtil.getResponseShakeHandTcpPacket(packet);
-                System.out.println("确认握手  : " + tcpPacket);
-                sender.sendPacket(tcpPacket);
-            }
-
             // 当ip数据包为不分片的单包时直接转发到节点
             if (!packet.more_frag && packet.offset == 0) {
+                //但tcp为请求握手数据包时
+                if (TcpUtil.isReqShakHandPacket(packet)) {
+                    //发送同意握手数据包
+                    TCPPacket tcpPacket = TcpUtil.getResponseShakeHandTcpPacket(packet);
+                    sender.sendPacket(tcpPacket);
+                }
                 distributionPackToNote(note,packet);
             }else {
                 if (packetCache.containsKey(String.valueOf(packet.ident))) {
@@ -89,6 +87,7 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
                     packetCacheTime.put(String.valueOf(packet.ident),System.nanoTime());
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,11 +141,13 @@ public class JpcapHttpPackageProcess implements Process<TCPPacket>{
                 packet.header[3] = ((EthernetPacket) packet.datalink).dst_mac[3];
                 packet.header[4] = ((EthernetPacket) packet.datalink).dst_mac[4];
                 packet.header[5] = ((EthernetPacket) packet.datalink).dst_mac[5];
+                //修正ip首部校验和
                 TcpUtil.flushCheckCode(packet);
-
+                //修正tcp首部校验和
+                TcpUtil.computeTcpCheckSum(packet,34);
                 sender.sendPacket(packet);
 
-                System.out.println("发送数据包：" + packet + "  给：" + note);
+//                System.out.println("发送数据包：" + packet + "  给：" + note);
             }
         } catch (Exception e) {
             e.printStackTrace();

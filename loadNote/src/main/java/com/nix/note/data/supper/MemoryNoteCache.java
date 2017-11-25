@@ -17,7 +17,7 @@ public class MemoryNoteCache implements NoteCache {
     private static final Object clock = new Object();
 
     private MemoryNoteCache(){
-        Note note = new Note("192.168.0.108","2c:56:dc:b0:24:1f");
+        Note note = new Note("192.168.0.110","00:0c:29:ac:33:1a");
         try {
             add(note);
             System.out.println(note.toString());

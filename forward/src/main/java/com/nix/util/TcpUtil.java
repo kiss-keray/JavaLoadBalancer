@@ -9,7 +9,8 @@ import java.time.OffsetDateTime;
 
 public final class TcpUtil {
     /**
-     * 重新计算ip数据包的校验码
+     * 重新计算ip数据包的校验码 反码运算
+     * @param packet tcp数据包
      * */
     public static void flushCheckCode(TCPPacket packet) {
         //14-33位ip数据包固定20位 24 25两位位校验码
@@ -117,7 +118,7 @@ public final class TcpUtil {
         //修改ack为1
         targetPacket.ack = true;
         targetPacket.header[tcpOffset + 13] = (byte) (targetPacket.header[tcpOffset + 13] | 0x10);
-
+        //修改窗口大小为0xffff
         targetPacket.header[tcpOffset + 14] = (byte) 0xff;
         targetPacket.header[tcpOffset + 15] = (byte) 0xff;
 
@@ -126,17 +127,17 @@ public final class TcpUtil {
         targetPacket.header[tcpOffset + 17] = 0;
         //修改tcp数据偏移数据
         targetPacket.header[tcpOffset + 12] = (byte) (((targetPacket.header.length - tcpOffset)/4) << 4);
-//        targetPacket.header[tcpOffset + 12] = (byte) 0x80;
-
-        System.out.println("sigm==" + targetPacket.header[tcpOffset + 12]);
-
+        //计算校验和
         computeTcpCheckSum(targetPacket, tcpOffset);
         flushCheckCode(targetPacket);
         return targetPacket;
     }
 
     /**
-     * 计算tcp数据包校验码
+     * 计算tcp数据包校验码 反码运算
+     * 公式:tcp头部与数据部分 2个字节合并为4位int 全部int相加和为sum 记录int相加时和大于0xffff的次数count<br><br/>
+     * 和sum还需加上12字节伪首部（源ip地址（4字节） 目的ip地址（4字节） tcp长度（tcp首部+数据部分）（4字节） 协议类型0x0006（两字节） + 0x0000（两字节））<br><br/>
+     * 加和完成后对sum取反后减去count
      * @param targetPacket tcp数据包
      * @param tcpOffset tcp头部在以太帧的偏移位置
      * */
@@ -163,6 +164,7 @@ public final class TcpUtil {
             count ++;
         }
         sum &= 0x0000ffff;
+        //加tcp头部加数据部分
         for (int i = tcpOffset;i < targetPacket.header.length;i += 2) {
 
             if (i == tcpOffset + 16) {
