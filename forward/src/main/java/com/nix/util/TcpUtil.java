@@ -52,16 +52,20 @@ public final class TcpUtil {
         TCPPacket targetPacket = new TCPPacket(shakePacket.dst_port,shakePacket.src_port,0,shakePacket.sequence,
                 shakePacket.urg,true,shakePacket.psh,shakePacket.rst,shakePacket.syn,shakePacket.fin,shakePacket.rsv1,
                 shakePacket.rsv2,shakePacket.window,shakePacket.urgent_pointer);
+        //tcp头部在数据包中偏移位置 （目前默认ip头部为20 + 以太头部14 ）34
         int tcpOffset = 34;
         targetPacket.header = new byte[shakePacket.header.length];
         for (int i = 0;i < targetPacket.header.length;i ++) {
             targetPacket.header[i] = shakePacket.header[i];
         }
-
-        //修改ip数据包总长度内容（固定20+20）
-        targetPacket.header[17] = 52;
-        //修改ip数据包的标识
-        targetPacket.header[18] = (byte) ~targetPacket.header[18];
+        //修改ip数据包总长度内容 header长度减去以太帧头部14
+        targetPacket.length = (short) (targetPacket.header.length - 14);
+        targetPacket.header[16] = (byte) (targetPacket.length >> 8);
+        targetPacket.header[17] = (byte) targetPacket.length;
+        //修改ip数据包的标识（随便在原先的iden加1000）
+        targetPacket.ident = shakePacket.ident + 1000;
+        targetPacket.header[18] = (byte) (targetPacket.ident >> 8);
+        targetPacket.header[18] = (byte) (targetPacket.ident);
 
         //更改目的mac地址
         targetPacket.header[0] = shakePacket.header[6];
@@ -113,10 +117,19 @@ public final class TcpUtil {
         //修改ack为1
         targetPacket.ack = true;
         targetPacket.header[tcpOffset + 13] = (byte) (targetPacket.header[tcpOffset + 13] | 0x10);
+
+        targetPacket.header[tcpOffset + 14] = (byte) 0xff;
+        targetPacket.header[tcpOffset + 15] = (byte) 0xff;
+
         //将校验和设置为0
         targetPacket.header[tcpOffset + 16] = 0;
         targetPacket.header[tcpOffset + 17] = 0;
-        targetPacket.header[tcpOffset + 12] = (byte) 0x80;
+        //修改tcp数据偏移数据
+        targetPacket.header[tcpOffset + 12] = (byte) (((targetPacket.header.length - tcpOffset)/4) << 4);
+//        targetPacket.header[tcpOffset + 12] = (byte) 0x80;
+
+        System.out.println("sigm==" + targetPacket.header[tcpOffset + 12]);
+
         computeTcpCheckSum(targetPacket, tcpOffset);
         flushCheckCode(targetPacket);
         return targetPacket;
@@ -138,7 +151,19 @@ public final class TcpUtil {
             }
             sum &= 0x0000ffff;
         }
-        for (int i = tcpOffset;i < targetPacket.length;i += 2) {
+        //添加协议类型（TCP 0x06）
+        sum += 0x00000006;
+        if (sum > 65535) {
+            count ++;
+        }
+        sum &= 0x0000ffff;
+        //添加tcp包数据长度（头部+数据）
+        sum += (targetPacket.length - 20);
+        if (sum > 65535) {
+            count ++;
+        }
+        sum &= 0x0000ffff;
+        for (int i = tcpOffset;i < targetPacket.header.length;i += 2) {
 
             if (i == tcpOffset + 16) {
                 continue;
@@ -150,21 +175,10 @@ public final class TcpUtil {
             }
             sum &= 0x0000ffff;
         }
-        //添加协议类型（TCP 0x06）
-        sum += 0x00000006;
-        if (sum > 65535) {
-            count ++;
-        }
-        sum &= 0x0000ffff;
-        //添加tcp包数据长度（头部+数据） 这里固定长20
-        sum += (targetPacket.length - 20);
-        if (sum > 65535) {
-            count ++;
-        }
-        sum &= 0x0000ffff;
         //反码运算
         sum = (~sum - count);
         targetPacket.header[tcpOffset + 16] = (byte) (sum >> 8);
         targetPacket.header[tcpOffset + 17] = (byte) sum;
+
     }
 }
