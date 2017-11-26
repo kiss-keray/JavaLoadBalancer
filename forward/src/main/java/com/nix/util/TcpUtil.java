@@ -127,8 +127,9 @@ public final class TcpUtil {
         targetPacket.header[tcpOffset + 17] = 0;
         //修改tcp数据偏移数据
         targetPacket.header[tcpOffset + 12] = (byte) (((targetPacket.header.length - tcpOffset)/4) << 4);
-        //计算校验和
+        //计算tcp头部校验和
         computeTcpCheckSum(targetPacket, tcpOffset);
+        //计算ip头部校验和
         flushCheckCode(targetPacket);
         return targetPacket;
     }
