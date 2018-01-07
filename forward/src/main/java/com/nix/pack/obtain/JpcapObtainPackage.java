@@ -31,15 +31,14 @@ public class JpcapObtainPackage implements ObtainPackage {
         }
     });
 
-    private static JpcapObtainPackage obtainPackage = null;
-    protected static final Object clock = new Object();
+    private static volatile JpcapObtainPackage obtainPackage = null;
 
     /**
      * 单例模式
      * */
     public static ObtainPackage getObtainPackage(NetworkInterface networkInterface) {
         if (obtainPackage == null) {
-            synchronized (clock) {
+            synchronized (JpcapObtainPackage.class) {
                 if (obtainPackage == null) {
                     obtainPackage = new JpcapObtainPackage(networkInterface);
                 }

@@ -9,12 +9,11 @@ import jpcap.NetworkInterface;
 public final class ObtainPackageFactory {
 
     private volatile static ObtainPackage obtainPackage = null;
-    private static final Object clock = new Object();
 
 
     public static ObtainPackage getJpcapGetPackage(NetworkInterface networkInterface) {
         if (obtainPackage == null) {
-            synchronized (clock) {
+            synchronized (ObtainPackageFactory.class) {
                 if (obtainPackage == null) {
                     obtainPackage = JpcapObtainPackage.getObtainPackage(networkInterface);
                 }
